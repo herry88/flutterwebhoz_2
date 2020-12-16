@@ -15,9 +15,11 @@ class Product {
   //kita tampung data variable ke dalam class
   Product(this.name, this.description, this.price, this.image);
 
-  //tampung di class Product dengan list
+  //tampung di class Product dengan list / array
   static List<Product> getProduct() {
     List<Product> items = <Product>[];
+
+    //array berfungsi untuk menampung beberapa nilai
 
     items.add(
       Product("Pixel", "Pixel is the most phone", 800, "pixel.jpg"),
@@ -92,6 +94,49 @@ class MyHomePage extends StatelessWidget {
   }
 }
 
+class ProductBox extends StatelessWidget {
+  final Product item;
+  ProductBox({Key key, this.item}) : super(key: key);
+
+  // $act = isset($_GET['act']) ? $_GET['act'] : ''; 
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.all(2.0),
+      height: 140.0,
+      child: new Card(
+        child: new Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Image.asset("images/" + this.item.image),
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.all(5.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    new Text(
+                      this.item.name,
+                      style: TextStyle(color: Colors.orange),
+                    ),
+                    new Text(
+                      this.item.description,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class ProductPage extends StatelessWidget {
   ProductPage({Key key, this.item}) : super(key: key);
   final Product item;
@@ -135,3 +180,5 @@ class ProductPage extends StatelessWidget {
     );
   }
 }
+
+
