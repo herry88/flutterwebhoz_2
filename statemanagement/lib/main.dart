@@ -45,6 +45,10 @@ class Product {
       Product("iphone", "Ini adalah iphone", 9000, "iphone.jpg"),
     );
 
+    items.add(
+      Product("iphone", "Ini adalah iphone", 9000, "iphone.jpg"),
+    );
+
     return items;
   }
 }
@@ -98,7 +102,7 @@ class ProductBox extends StatelessWidget {
   final Product item;
   ProductBox({Key key, this.item}) : super(key: key);
 
-  // $act = isset($_GET['act']) ? $_GET['act'] : ''; 
+  // $act = isset($_GET['act']) ? $_GET['act'] : '';
 
   @override
   Widget build(BuildContext context) {
@@ -126,6 +130,7 @@ class ProductBox extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                    RatingBox()
                   ],
                 ),
               ),
@@ -170,6 +175,8 @@ class ProductPage extends StatelessWidget {
                     Text(
                       "Harga : " + this.item.price.toString(),
                     ),
+                    //reusewidget 
+                    RatingBox(),
                   ],
                 ),
               ),
@@ -181,4 +188,81 @@ class ProductPage extends StatelessWidget {
   }
 }
 
+//statemanangement
+class RatingBox extends StatefulWidget {
+  @override
+  _RatingBoxState createState() => _RatingBoxState();
+}
 
+class _RatingBoxState extends State<RatingBox> {
+  int _rating = 0;
+
+  //function untuk bintang satu
+  void _setRatingAsOne() {
+    setState(() {
+      _rating = 1;
+    });
+  }
+
+  //function untuk bintang dua
+  void _setRatingAsTwo() {
+    setState(() {
+      _rating = 2;
+    });
+  }
+
+  //funciton untuk bintang tiga
+  void _setRatingAsThree() {
+    setState(() {
+      _rating = 3;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    double _size = 20;
+    print(_rating);
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        //container star 1
+        Container(
+          padding: EdgeInsets.all(0),
+          child: IconButton(
+            icon: (_rating >= 1
+                ? Icon(Icons.star, size: _size)
+                : Icon(Icons.star_border, size: _size)),
+            color: Colors.red,
+            onPressed: _setRatingAsOne,
+            iconSize: _size,
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.all(0),
+          child: IconButton(
+            icon: (_rating >= 2
+                ? Icon(Icons.star, size: _size)
+                : Icon(Icons.star_border, size: _size)),
+            color: Colors.red,
+            onPressed: _setRatingAsTwo,
+            iconSize: _size,
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.all(0),
+          child: IconButton(
+            icon: (_rating >= 3
+                ? Icon(Icons.star, size: _size)
+                : Icon(Icons.star_border, size: _size)),
+            color: Colors.red,
+            onPressed: _setRatingAsThree,
+            iconSize: _size,
+          ),
+        ),
+        
+      ],
+    );
+  }
+}
